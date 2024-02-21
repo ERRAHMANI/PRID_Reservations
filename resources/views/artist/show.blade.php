@@ -1,5 +1,4 @@
-@extends('layouts.app')
-
+@extends('layouts.main')
 @section('title', 'Fiche d\'un artiste')
 
 @section('content')
