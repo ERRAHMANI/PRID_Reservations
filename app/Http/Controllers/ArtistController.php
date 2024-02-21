@@ -132,6 +132,10 @@ class ArtistController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Artist::destroy($id);
+
+        return redirect()->route('artist.index');
     }
+
+
 }
