@@ -20,8 +20,8 @@ class ArtistController extends Controller
             'artists' => $artists,
             'resource' => 'artistes',
         ]);
-
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -57,8 +57,8 @@ class ArtistController extends Controller
         return view('artist.show',[
             'artist' => $artist,
         ]);
-
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -68,8 +68,13 @@ class ArtistController extends Controller
      */
     public function edit($id)
     {
-        //
+        $artist = Artist::find($id);
+        
+        return view('artist.edit',[
+            'artist' => $artist,
+        ]);
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -80,8 +85,26 @@ class ArtistController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+	   //Validation des données du formulaire
+        $validated = $request->validate([
+            'firstname' => 'required|max:60',
+            'lastname' => 'required|max:60',
+        ]);
+
+	   //Le formulaire a été validé, nous récupérons l’artiste à modifier
+        $artist = Artist::find($id);
+
+	   //Mise à jour des données modifiées et sauvegarde dans la base de données
+        $artist->update($validated);
+
+        return view('artist.show',[
+            'artist' => $artist,
+        ]);
     }
+
+//…
+
+
 
     /**
      * Remove the specified resource from storage.
