@@ -98,6 +98,11 @@ class ArtistController extends Controller
         if (!Gate::allows('create-artist')) {
             abort(403);
         }
+        $artist = Artist::find($id);
+
+        return view('artist.edit', [
+            'artist' => $artist,
+        ]);
 
     }
 
@@ -143,9 +148,20 @@ class ArtistController extends Controller
         if (!Gate::allows('create-artist')) {
             abort(403);
         }
-	
+        $artist = Artist::find($id);
+
+        if ($artist) {
+            $artist->delete();
+        }
+
+        return redirect()->route('artist.index');
+
 
     }
 
 
 }
+
+
+
+
