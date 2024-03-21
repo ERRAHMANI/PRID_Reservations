@@ -21,5 +21,6 @@ class Locality extends Model
         'locality',
 
     ];
+    //code a completer
 
 }
