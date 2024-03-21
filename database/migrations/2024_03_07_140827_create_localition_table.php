@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('localition', function (Blueprint $table) {
             $table->id();
+            $table->string('slug');
+            $table->string('designation');
+            $table->string('address');
+            $table->integer('locality_id');
+            $table->string('website');
+            $table->string('phone');
             $table->timestamps();
         });
     }

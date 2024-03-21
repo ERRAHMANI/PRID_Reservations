@@ -16,6 +16,11 @@ class Artist extends Model
      */
     protected $fillable = ['firstname', 'lastname'];
 
+    public function types()
+    {
+        return $this->belongsToMany(Type::class);
+    }
+
    /**
      * The table associated with the model.
      *

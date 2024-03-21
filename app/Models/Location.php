@@ -8,4 +8,30 @@ use Illuminate\Database\Eloquent\Model;
 class Location extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'slug',
+        'designation',
+        'address',
+        'locality_id',
+        'website',
+        'phone',
+
+    ];
+    public function locality()
+    {
+        return $this->hasOne(Locality::class);
+    }
+    
+
+    public function representation()
+    {
+        return $this->belongsTo(Representation::class);
+    }
+    public function show()
+    {
+        return $this->belongsTo(Show::class);
+    }
+    protected $table = 'location';
+
 }
