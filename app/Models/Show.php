@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class show extends Model
 {
     use HasFactory;
-    protected $table = 'show';
+    protected $table = 'shows';
     public function representation()
     {
         return $this->belongsTo(Representation::class);
@@ -17,6 +17,13 @@ class show extends Model
     {
         return $this->hasOne(Location::class);
     }
+
+    public function artist_types()
+    {
+        return $this->belongsToMany(Artist_type::class);
+    }
+    public $timestamps = false ;
+
     protected $fillable = [
         'slug',
         'title',

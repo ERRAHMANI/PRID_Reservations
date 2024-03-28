@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('show', function (Blueprint $table) {
+        Schema::create('shows', function (Blueprint $table) {
             $table->id();
             $table->string('slug');
             $table->string('title');
@@ -20,7 +20,6 @@ return new class extends Migration
             $table->integer('location_id');
             $table->tinyInteger('bookable');
             $table->decimal('price');
-            $table->timestamps();
         });
     }
 
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('show');
+        Schema::dropIfExists('shows');
     }
 };

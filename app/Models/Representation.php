@@ -13,11 +13,17 @@ class Representation extends Model
         'when',
         'location_id',
     ];
+    public $timestamps = false ;
+
     
     public function location()
     {
         return $this->hasOne(Location::class);
     }
-    protected $table = 'representation';
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+    protected $table = 'representations';
 
 }

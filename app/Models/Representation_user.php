@@ -14,6 +14,8 @@ class Representation_user extends Model
         'user_id',
         'place',
     ];
+    public $timestamps = false ;
+
     protected $table = 'representation_user';
 
 }

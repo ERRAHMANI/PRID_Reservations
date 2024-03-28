@@ -14,5 +14,7 @@ class Artist_type_show extends Model
         'show_id',
 
     ];
+    public $timestamps = false ;
+
     protected $table = 'artist_type_show';
 }

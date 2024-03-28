@@ -18,6 +18,9 @@ class Location extends Model
         'phone',
 
     ];
+    public $timestamps = false ;
+
+
     public function locality()
     {
         return $this->hasOne(Locality::class);
@@ -32,6 +35,6 @@ class Location extends Model
     {
         return $this->belongsTo(Show::class);
     }
-    protected $table = 'location';
+    protected $table = 'locations';
 
 }
