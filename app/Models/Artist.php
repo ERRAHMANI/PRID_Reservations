@@ -40,5 +40,4 @@ class Artist extends Model
      *
      * @var bool
      */
-    public $timestamps = false;
 }

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('slug');
             $table->string('title');
             $table->string('description');
-            $table->integer('poster_url');
+            $table->string('poster_url');
             $table->integer('location_id');
             $table->tinyInteger('bookable');
             $table->decimal('price');

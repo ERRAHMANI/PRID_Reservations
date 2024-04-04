@@ -12,7 +12,7 @@ class Representation_user extends Model
     protected $fillable = [
         'representation_id',
         'user_id',
-        'place',
+        'places',
     ];
     public $timestamps = false ;
 
