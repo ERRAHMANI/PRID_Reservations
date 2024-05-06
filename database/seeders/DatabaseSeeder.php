@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
             ShowSeeder::class,
             RepresentationSeeder::class,
             RepresentationUserSeeder::class,
+            RoleSeeder::class,
+            RoleUserSeeder::class,
 
 
         ]);
