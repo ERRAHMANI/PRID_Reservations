@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
@@ -27,34 +28,26 @@ class NewPasswordController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    
+     public function showChangePasswordForm()
     {
-        $request->validate([
-            'current_password' => ['required'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'password_confirmation' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
-
-        // Here we will attempt to reset the user's password. If it is successful we
-        // will update the password on an actual user model and persist it to the
-        // database. Otherwise we will parse the error and return the response.
-        $status = Password::reset(
-            $request->only('current_password', 'password', 'password_confirmation'),
-            function ($user) use ($request) {
-                $user->forceFill([
-                    'password' => Hash::make($request->password),
-                ])->save();
-
-                event(new PasswordReset($user));
-            }
-        );
-
-        // If the password was successfully reset, we will redirect the user back to
-        // the application's home authenticated view. If there is an error we can
-        // redirect them back to where they came from with their error message.
-        return $status == Password::PASSWORD_RESET
-                    ? redirect()->route('login')->with('status', __($status))
-                    : back()->withInput($request->only('email'))
-                            ->withErrors(['email' => __($status)]);
+        return view('auth.change-password');
     }
+     public function changePassword(Request $request)
+     {
+         $request->validate([
+             'current_password' => 'required',
+             'password' => 'required|confirmed|min:8',
+         ]);
+ 
+         $user = $request->user();
+ 
+         if (!Hash::check($request->current_password, $user->password)) {
+             return redirect()->back()->withErrors(['current_password' => 'Current password is incorrect']);
+         }
+ 
+         $user->update(['password' => Hash::make($request->password)]);
+ 
+         return redirect()->route('dashboard')->with('success', 'Password updated successfully');
+     }
 }

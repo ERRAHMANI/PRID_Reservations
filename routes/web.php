@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ArtistController;
+use App\Http\Controllers\Auth\NewPasswordController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,6 +43,11 @@ Route::put('/artist/{id}', [ArtistController::class, 'update'])
 		->where('id', '[0-9]+')->name('artist.update');
 Route::post('/artist/{id}', [ArtistController::class, 'destroy'])
 	->where('id', '[0-9]+')->name('artist.delete');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/change-password', [NewPasswordController::class, 'showChangePasswordForm'])->name('password.change');
+    Route::post('/change-password', [NewPasswordController::class, 'changePassword'])->name('password.update');
+});
 
 //…
 
