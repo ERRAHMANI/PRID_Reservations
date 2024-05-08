@@ -2,11 +2,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Show; // Assurez-vous d'importer le modèle Show
+use App\Models\Show;
+use App\Models\Location;
 
 class ShowController extends Controller
 {
-    
     public function index(Request $request)
     {
         // Récupérer les critères de tri depuis la requête
@@ -14,9 +14,27 @@ class ShowController extends Controller
         $sortDirection = $request->input('sortDirection', 'asc'); // Par défaut, trier en ordre croissant
 
         // Récupérer les spectacles en fonction des critères de tri
-        $shows = Show::orderBy($sortBy, $sortDirection)->get();
+        $query = Show::query();
 
-        return view('shows.index', compact('shows'));
+        // Filtrer par localisation si une localisation est sélectionnée
+        $locationId = $request->input('location_id');
+        if ($locationId) {
+            $query->where('location_id', $locationId);
+        }
+
+        // Filtrer par fourchette de prix si des valeurs min et max sont fournies
+        $minPrice = $request->input('min_price');
+        $maxPrice = $request->input('max_price');
+        if ($minPrice !== null && $maxPrice !== null) {
+            $query->whereBetween('price', [$minPrice, $maxPrice]);
+        }
+
+        $shows = $query->orderBy($sortBy, $sortDirection)->get();
+
+        // Récupérer toutes les localisations pour les filtres
+        $locations = Location::all();
+
+        return view('shows.index', compact('shows', 'locations'));
     }
     
     public function search(Request $request)
@@ -28,6 +46,9 @@ class ShowController extends Controller
                      ->orWhere('description', 'like', "%$query%")
                      ->get();
 
-        return view('shows.index', compact('shows'));
+        // Récupérer toutes les localisations pour les filtres
+        $locations = Location::all();
+
+        return view('shows.index', compact('shows', 'locations'));
     }
 }

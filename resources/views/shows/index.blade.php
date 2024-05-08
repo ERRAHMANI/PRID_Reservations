@@ -22,6 +22,22 @@
         <button type="submit">Trier</button>
     </form>
 
+    <!-- Formulaire de filtre -->
+    <form action="{{ route('shows.index') }}" method="GET">
+        <!-- Filtre par localisation -->
+        <select name="location_id">
+            <option value="">Toutes les localisations</option>
+            @foreach($locations as $location)
+                <option value="{{ $location->id }}">{{ $location->designation }}</option>
+            @endforeach
+        </select>
+        <!-- Filtre par fourchette de prix -->
+        <input type="number" name="min_price" placeholder="Prix minimum">
+        <input type="number" name="max_price" placeholder="Prix maximum">
+        <!-- Bouton pour appliquer les filtres -->
+        <button type="submit">Appliquer les filtres</button>
+    </form>
+
     <ul>
         @foreach ($shows as $show)
             <li>
