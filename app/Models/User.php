@@ -28,7 +28,18 @@ class User extends Authenticatable
         'langue',
 
     ];
+    /**
+     *
+     * @var bool
+     */
     public $timestamps = false ;
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = true;
+
 
     public function roles()
     {
@@ -60,4 +71,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    protected $guarded = ['id'];
+
 }

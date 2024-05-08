@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -29,6 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'delete'])->name('profile.delete');
+    Route::get('/change-password', [NewPasswordController::class, 'showChangePasswordForm'])->name('password.change');
+    Route::post('/change-password', [NewPasswordController::class, 'changePassword'])->name('password.update');
 });
 //…
 
@@ -44,13 +47,19 @@ Route::put('/artist/{id}', [ArtistController::class, 'update'])
 Route::post('/artist/{id}', [ArtistController::class, 'destroy'])
 	->where('id', '[0-9]+')->name('artist.delete');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/change-password', [NewPasswordController::class, 'showChangePasswordForm'])->name('password.change');
-    Route::post('/change-password', [NewPasswordController::class, 'changePassword'])->name('password.update');
+
+
+Route::middleware('guest')->group(function () {
+
+    Route::get('/register', [RegisteredUserController::class, 'create'])->name('register.create');
+    Route::post('/register', [RegisteredUserController::class, 'store'])->name('register.store');
+
+    
 });
 
 
-//…
+
+
 
 require __DIR__.'/auth.php';
 
