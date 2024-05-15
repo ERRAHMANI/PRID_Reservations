@@ -27,6 +27,10 @@ use Illuminate\Support\Facades\Gate;
     public function boot()
     {
         $this->registerPolicies();
+        
+        Gate::define('admin', function (User $user) {
+            return $user->role === 'admin';
+        });
 
         Gate::define('create-artist', function (User $user) {
             return $user->role === 'admin';
@@ -36,6 +40,18 @@ use Illuminate\Support\Facades\Gate;
         });
 
         Gate::define('delete-artist', function (User $user) {
+            return $user->role === 'admin';
+        });
+
+        Gate::define('create-show', function (User $user) {
+            return $user->role === 'admin';
+        });
+    
+        Gate::define('update-show', function (User $user) {
+            return $user->role === 'admin';
+        });
+    
+        Gate::define('delete-show', function (User $user) {
             return $user->role === 'admin';
         });
 

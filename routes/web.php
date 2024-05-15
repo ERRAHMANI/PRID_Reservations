@@ -40,7 +40,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/change-password', [NewPasswordController::class, 'changePassword'])->name('password.update');
     
 });
-//…
+
+
 
 Route::get('/artist', [ArtistController::class, 'index'])->name('artist.index');
 Route::get('/artist/{id}', [ArtistController::class, 'show'])
@@ -61,6 +62,15 @@ Route::middleware('guest')->group(function () {
 
     Route::post('/register', [RegisteredUserController::class, 'store'])->name('register.store');
 });
+
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/shows/create', [ShowController::class, 'create'])->name('shows.create');
+    Route::post('/shows', [ShowController::class, 'store'])->name('shows.store');
+    Route::get('/shows/edit/{id}', [ShowController::class, 'edit'])->name('shows.edit');
+    Route::put('/shows/{id}', [ShowController::class, 'update'])->name('shows.update');
+    Route::delete('/shows/{id}', [ShowController::class, 'destroy'])->name('shows.destroy');
+});
+
 
 
 

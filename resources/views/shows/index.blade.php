@@ -45,7 +45,21 @@
                 <p>{{ $show->description }}</p>
                 <img src="{{ $show->poster_url }}" alt="{{ $show->title }}">
                 <p>Prix : {{ $show->price }}</p>
+                <!-- Ajoutez ces liens uniquement si l'utilisateur est un admin -->
+                @can('admin')
+                    <a href="{{ route('shows.edit', $show->id) }}">Modifier</a>
+                    <form action="{{ route('shows.destroy', $show->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">Supprimer</button>
+                    </form>
+                @endcan
             </li>
         @endforeach
     </ul>
+
+    <!-- Ajoutez ce lien uniquement si l'utilisateur est un admin -->
+    @can('admin')
+        <a href="{{ route('shows.create') }}">Ajouter un spectacle</a>
+    @endcan
 @endsection

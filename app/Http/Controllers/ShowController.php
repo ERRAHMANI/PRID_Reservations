@@ -51,4 +51,57 @@ class ShowController extends Controller
 
         return view('shows.index', compact('shows', 'locations'));
     }
+
+    public function create()
+    {
+        return view('shows.create');
+    }
+
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'poster_url' => 'required|url',
+            'location_id' => 'required',
+            'bookable' => 'required',
+            'price' => 'required|numeric',
+            // Ajoutez d'autres règles de validation au besoin
+        ]);
+
+        Show::create($validatedData);
+
+        return redirect()->route('shows.index')->with('success', 'Spectacle ajouté avec succès.');
+    }
+
+    public function edit($id)
+    {
+        $show = Show::findOrFail($id);
+        return view('shows.edit', compact('show'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'poster_url' => 'required|url',
+            'location_id' => 'required',
+            'bookable' => 'required',
+            'price' => 'required|numeric',
+        ]);
+
+        $show = Show::findOrFail($id);
+        $show->update($validatedData);
+
+        return redirect()->route('shows.index')->with('success', 'Spectacle mis à jour avec succès.');
+    }
+
+    public function destroy($id)
+    {
+        $show = Show::findOrFail($id);
+        $show->delete();
+
+        return redirect()->route('shows.index')->with('success', 'Spectacle supprimé avec succès.');
+    }
 }
