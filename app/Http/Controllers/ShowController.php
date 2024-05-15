@@ -58,21 +58,20 @@ class ShowController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'poster_url' => 'required|url',
-            'location_id' => 'required',
-            'bookable' => 'required',
-            'price' => 'required|numeric',
-            // Ajoutez d'autres règles de validation au besoin
-        ]);
+{
+    $validatedData = $request->validate([
+        'title' => 'required',
+        'description' => 'required',
+        'poster_url' => 'required|url',
+        'location_id' => 'required',
+        'price' => 'required|numeric',
+    ]);
 
-        Show::create($validatedData);
+    Show::create($validatedData);
 
-        return redirect()->route('shows.index')->with('success', 'Spectacle ajouté avec succès.');
-    }
+    return redirect()->route('shows.index')->with('success', 'Spectacle ajouté avec succès.');
+}
+
 
     public function edit($id)
     {

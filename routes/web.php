@@ -63,7 +63,7 @@ Route::middleware('guest')->group(function () {
     Route::post('/register', [RegisteredUserController::class, 'store'])->name('register.store');
 });
 
-Route::middleware(['auth', 'role:admin'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/shows/create', [ShowController::class, 'create'])->name('shows.create');
     Route::post('/shows', [ShowController::class, 'store'])->name('shows.store');
     Route::get('/shows/edit/{id}', [ShowController::class, 'edit'])->name('shows.edit');
