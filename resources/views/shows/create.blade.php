@@ -26,7 +26,10 @@
             <input type="number" id="location_id" name="location_id" required>
         </div>
 
-        
+        <div>
+            <label for="bookable">Réservable</label>
+            <input type="checkbox" id="bookable" name="bookable">
+        </div>
 
         <div>
             <label for="price">Prix</label>
