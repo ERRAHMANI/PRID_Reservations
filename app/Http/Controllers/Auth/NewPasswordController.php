@@ -31,7 +31,7 @@ class NewPasswordController extends Controller
     
      public function showChangePasswordForm()
     {
-        return view('auth.change-password');
+        return view('auth.update-password-form');
     }
      public function changePassword(Request $request)
      {
