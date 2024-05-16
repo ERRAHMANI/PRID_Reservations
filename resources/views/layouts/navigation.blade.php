@@ -8,6 +8,9 @@
             </x-responsive-nav-link>
         </div>
         <a href="{{ route('shows.index') }}">Spectacles</a>
+        @auth
+            <a href="{{ route('user.reservations') }}">Mes Réservations</a>
+        @endauth
         
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">

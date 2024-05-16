@@ -85,6 +85,15 @@ class ShowController extends Controller
     return redirect()->route('shows.index')->with('success', 'Réservation effectuée avec succès.');
 }
 
+public function userReservations()
+{
+    // Récupérer les réservations de l'utilisateur connecté
+    $userId = auth()->id();
+    $reservations = Representation_user::where('user_id', $userId)->with('representation')->get();
+
+    return view('shows.user_reservations', compact('reservations'));
+}
+
     
     public function search(Request $request)
     {

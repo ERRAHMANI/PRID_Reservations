@@ -73,7 +73,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/shows/{id}', [ShowController::class, 'destroy'])->name('shows.destroy');
     Route::get('/shows/{id}/reserve', [ShowController::class, 'reserve'])->name('shows.reservations.reserve');
     Route::post('/shows/{id}/reserve', [ShowController::class, 'storeReservation'])->name('shows.reservations.store');
-
+    Route::get('/user/reservations', [ShowController::class, 'userReservations'])->name('user.reservations');
 });
 
 

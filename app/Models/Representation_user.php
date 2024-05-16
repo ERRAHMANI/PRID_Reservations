@@ -17,5 +17,9 @@ class Representation_user extends Model
     public $timestamps = false ;
 
     protected $table = 'representation_user';
+    public function representation()
+    {
+        return $this->belongsTo(Representation::class, 'representation_id');
+    }
 
 }

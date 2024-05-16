@@ -46,10 +46,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class);
     }
 
-    public function representations()
+        public function representations()
     {
-        return $this->belongsToMany(Representation::class);
+        return $this->hasMany(Representation_user::class);
     }
+
    
 
     /**
