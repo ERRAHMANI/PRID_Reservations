@@ -9,7 +9,7 @@
             <div>
                 <h2>{{ $reservation->representation->show->title }}</h2>
                 <p>Date: {{ $reservation->representation->when }}</p>
-                <p>Place: {{ $reservation->places }}</p>
+                <p>Places: {{ $reservation->places }}</p>
             </div>
         @endif
     @endforeach

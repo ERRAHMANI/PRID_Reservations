@@ -40,5 +40,6 @@ class RepresentationUserSeeder extends Seeder
         ];
         
         //Insert data in the table
+        DB::table('representation_user')->insert($representationUsers);
     }
 }

@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "content-hash": "87d60b01f7477fb7ff76ba398acf68fa",
-=======
     "content-hash": "50f30bc93268d2f0783a4a3a3d2dc5b4",
->>>>>>> cheik
     "packages": [
         {
             "name": "brick/math",
@@ -1394,8 +1390,6 @@
             "time": "2023-12-03T19:50:20+00:00"
         },
         {
-<<<<<<< HEAD
-=======
             "name": "inertiajs/inertia-laravel",
             "version": "v1.0.0",
             "source": {
@@ -1471,7 +1465,6 @@
             "time": "2024-03-09T00:30:58+00:00"
         },
         {
->>>>>>> cheik
             "name": "laravel/framework",
             "version": "v10.45.1",
             "source": {

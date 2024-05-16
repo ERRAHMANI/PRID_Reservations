@@ -8,9 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
-
 use Illuminate\Validation\ValidationException;
-
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
@@ -52,5 +50,4 @@ class NewPasswordController extends Controller
  
          return redirect()->route('dashboard')->with('success', 'Password updated successfully');
      }
-
 }
