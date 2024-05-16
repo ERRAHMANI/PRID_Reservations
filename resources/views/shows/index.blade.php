@@ -45,7 +45,7 @@
                 <p>{{ $show->description }}</p>
                 <img src="{{ $show->poster_url }}" alt="{{ $show->title }}">
                 <p>Prix : {{ $show->price }}</p>
-                <p>Réservable : {{ $show->bookable }}</p>
+                <p>Réservable : {{ $show->bookable == 1 ? 'oui' : 'non' }}</p>
                 <!-- Ajoutez ces liens uniquement si l'utilisateur est un admin -->
                 @can('admin')
                     <a href="{{ route('shows.edit', $show->id) }}">Modifier</a>

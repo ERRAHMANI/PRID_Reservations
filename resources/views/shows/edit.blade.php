@@ -28,12 +28,13 @@
         </div>
 
         <div>
-    <label for="bookable">Réservable</label>
-    <!-- Champ caché pour envoyer la valeur 0 si la case n'est pas cochée -->
-    <input type="hidden" name="bookable" value="0">
-    <!-- Case à cocher pour l'état de réservation -->
-    <input type="checkbox" id="bookable" name="bookable" value="1" {{ $show->bookable ? 'checked' : '' }}>
-</div>
+            
+        <label for="bookable">Réservable</label>
+        <!-- Champ caché pour envoyer la valeur 0 si la case n'est pas cochée -->
+        <input type="hidden" name="bookable" value="0">
+        <!-- Case à cocher pour l'état de réservation -->
+        <input type="checkbox" id="bookable" name="bookable" value="1" {{ $show->bookable ? 'checked' : '' }}>
+        </div>
 
 
 
