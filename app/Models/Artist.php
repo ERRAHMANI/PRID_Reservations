@@ -15,6 +15,18 @@ class Artist extends Model
      * @var array
      */
     protected $fillable = ['firstname', 'lastname'];
+    public $timestamps = false ;
+
+
+    public function types()
+    {
+        return $this->belongsToMany(Type::class);
+    }
+
+    public function artist_types()
+    {
+        return $this->belongsToMany(Artist_type::class);
+    }
 
    /**
      * The table associated with the model.
@@ -28,5 +40,4 @@ class Artist extends Model
      *
      * @var bool
      */
-    public $timestamps = false;
 }

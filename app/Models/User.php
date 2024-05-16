@@ -11,6 +11,8 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    protected $table =  'users';
+
 
     /**
      * The attributes that are mass assignable.
@@ -26,6 +28,30 @@ class User extends Authenticatable
         'langue',
 
     ];
+    /**
+     *
+     * @var bool
+     */
+    public $timestamps = false ;
+    /**
+     * Indicates if the IDs are auto-incrementing.
+     *
+     * @var bool
+     */
+    public $incrementing = true;
+
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+        public function representations()
+    {
+        return $this->hasMany(Representation_user::class);
+    }
+
+   
 
     /**
      * The attributes that should be hidden for serialization.
@@ -46,4 +72,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    protected $guarded = ['id'];
+
 }
