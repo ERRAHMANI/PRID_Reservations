@@ -14,7 +14,17 @@ class RepresentationSeeder extends Seeder
      */
     public function run(): void
     {
-        Representation::truncate();        
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+
+        // Tronquer la table
+        DB::table('representations')->truncate();
+
+        // Insérer des données dans la table artists
+        // Vos instructions d'insertion de données ici
+
+        // Réactiver les contraintes de clé étrangère
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
+                
         //Define data
         $representations = [
             ['show_id' => 1, 'when' => '2024-04-01 20:00:00', 'location_id' => 1],

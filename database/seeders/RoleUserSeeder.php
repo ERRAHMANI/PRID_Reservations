@@ -15,7 +15,17 @@ class RoleUserSeeder extends Seeder
     public function run(): void
     {
           //Empty the table first
-        Role_user::truncate();        
+          DB::statement('SET FOREIGN_KEY_CHECKS=0');
+
+          // Tronquer la table
+          DB::table('role_user')->truncate();
+  
+          // Insérer des données dans la table artists
+          // Vos instructions d'insertion de données ici
+  
+          // Réactiver les contraintes de clé étrangère
+          DB::statement('SET FOREIGN_KEY_CHECKS=1');
+                  
           //Define data
           $roleUsers = [
               [
@@ -26,6 +36,38 @@ class RoleUserSeeder extends Seeder
                   'role_id' => 2,
                   'user_id' => 2,
               ],
+              [
+                'role_id' => 1,
+                'user_id' => 3,
+            ],
+            [
+                'role_id' => 2,
+                'user_id' => 4,
+            ],
+            [
+                'role_id' => 1,
+                'user_id' => 5,
+            ],
+            [
+                'role_id' => 2,
+                'user_id' => 6,
+            ],
+            [
+                'role_id' => 1,
+                'user_id' => 7,
+            ],
+            [
+                'role_id' => 2,
+                'user_id' => 8,
+            ],
+            [
+                'role_id' => 1,
+                'user_id' => 9,
+            ],
+            [
+                'role_id' => 2,
+                'user_id' => 10,
+            ],
               // Ajoutez d'autres données selon vos besoins
           ];
           

@@ -4,6 +4,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Show;
 use App\Models\Location;
+use App\Models\Representation;
+use App\Models\Representation_user;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
+
 
 class ShowController extends Controller
 {
@@ -36,6 +42,49 @@ class ShowController extends Controller
 
         return view('shows.index', compact('shows', 'locations'));
     }
+
+    public function reserve($id)
+    {
+        try {
+            // Représentation spécifique à réserver
+            $representation = Representation::findOrFail($id);
+    
+            return view('shows.reserve', compact('representation'));
+        } catch (ModelNotFoundException $e) {
+            return redirect()->back()->with('error', 'La représentation spécifiée n\'existe pas.');
+        }
+    }
+
+
+    public function storeReservation(Request $request, $id)
+{
+    // Valider les données de la requête
+    $request->validate([
+        'places' => 'required|integer|min:1', // Modifier 'place_number' en 'places'
+    ]);
+
+    // Vérifier si le numéro de place spécifié est disponible pour la représentation
+    $representation = Representation::findOrFail($id);
+
+    // Vérifier si la place spécifiée est déjà réservée pour cette représentation
+    $reservedPlaceExists = Representation_user::where('representation_id', $id)
+        ->where('places', $request->places)
+        ->exists();
+
+    if ($reservedPlaceExists) {
+        return redirect()->back()->with('error', 'La place spécifiée est déjà réservée pour cette représentation.');
+    }
+
+    // Créer une nouvelle réservation
+    $reservation = new Representation_user();
+    $reservation->representation_id = $id;
+    $reservation->user_id = Auth::id();
+    $reservation->places = $request->places;
+    $reservation->save();
+
+    return redirect()->route('shows.index')->with('success', 'Réservation effectuée avec succès.');
+}
+
     
     public function search(Request $request)
     {

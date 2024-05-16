@@ -15,8 +15,17 @@ class LocationSeeder extends Seeder
      */
     public function run(): void
     {
-         //Empty the table first
-        Location::truncate();        
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+
+        // Tronquer la table
+        DB::table('locations')->truncate();
+
+        // Insérer des données dans la table artists
+        // Vos instructions d'insertion de données ici
+
+        // Réactiver les contraintes de clé étrangère
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
+                
          //Define data
          $locations = [
              [

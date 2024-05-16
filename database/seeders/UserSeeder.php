@@ -19,15 +19,25 @@ class UserSeeder extends Seeder
     public function run()
     {
         //Empty the table first
-        User::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+
+        // Tronquer la table
+        DB::table('users')->truncate();
+
+        // Insérer des données dans la table artists
+        // Vos instructions d'insertion de données ici
+
+        // Réactiver les contraintes de clé étrangère
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
+        
 
         //Define data
         $users = [
             [
-                'login'=>'bobe',
+                'login'=>'bobejkj',
                 'firstname'=>'Bob',
                 'lastname'=>'Sull',
-                'email'=>'bobe@sull.com',
+                'email'=>'bobejjkj@sull.com',
                 'password'=>'12345678',
                 'langue'=>'fr',
                 'role'=>'admin',

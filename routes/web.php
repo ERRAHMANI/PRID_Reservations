@@ -62,6 +62,8 @@ Route::middleware('guest')->group(function () {
 
     Route::post('/register', [RegisteredUserController::class, 'store'])->name('register.store');
 });
+Route::get('/shows', [ShowController::class, 'index'])->name('shows.index');
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/shows/create', [ShowController::class, 'create'])->name('shows.create');
@@ -69,6 +71,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/shows/edit/{id}', [ShowController::class, 'edit'])->name('shows.edit');
     Route::put('/shows/{id}', [ShowController::class, 'update'])->name('shows.update');
     Route::delete('/shows/{id}', [ShowController::class, 'destroy'])->name('shows.destroy');
+    Route::get('/shows/{id}/reserve', [ShowController::class, 'reserve'])->name('shows.reservations.reserve');
+    Route::post('/shows/{id}/reserve', [ShowController::class, 'storeReservation'])->name('shows.reservations.store');
+
 });
 
 

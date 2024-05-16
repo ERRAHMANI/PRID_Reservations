@@ -20,6 +20,10 @@ class Representation extends Model
     {
         return $this->hasOne(Location::class);
     }
+        public function show()
+    {
+        return $this->belongsTo(Show::class);
+    }
     public function users()
     {
         return $this->belongsToMany(User::class);

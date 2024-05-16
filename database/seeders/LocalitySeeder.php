@@ -16,7 +16,17 @@ class LocalitySeeder extends Seeder
      */
     public function run(): void
     {
-        Locality::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+
+        // Tronquer la table
+        DB::table('localities')->truncate();
+
+        // Insérer des données dans la table artists
+        // Vos instructions d'insertion de données ici
+
+        // Réactiver les contraintes de clé étrangère
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
+        
 
         // Define data
         $localities = [

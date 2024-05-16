@@ -16,8 +16,16 @@ class ArtistTypeSeeder extends Seeder
      */
     public function run(): void
     {
-        //Empty the table first
-        Artist_type::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+
+        // Tronquer la table
+        DB::table('artist_type')->truncate();
+
+        // Insérer des données dans la table artists
+        // Vos instructions d'insertion de données ici
+
+        // Réactiver les contraintes de clé étrangère
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
         
         //Define data
         $artistTypes = [
