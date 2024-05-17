@@ -9,8 +9,6 @@ use App\Models\Representation_user;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-
-
 class ShowController extends Controller
 {
     public function index(Request $request)
@@ -35,7 +33,8 @@ class ShowController extends Controller
             $query->whereBetween('price', [$minPrice, $maxPrice]);
         }
 
-        $shows = $query->orderBy($sortBy, $sortDirection)->get();
+        // Charger les relations location
+        $shows = $query->with('location')->orderBy($sortBy, $sortDirection)->get();
 
         // Récupérer toutes les localisations pour les filtres
         $locations = Location::all();
@@ -43,65 +42,66 @@ class ShowController extends Controller
         return view('shows.index', compact('shows', 'locations'));
     }
 
+    // Autres méthodes...
+
     public function reserve($id)
     {
         try {
             // Représentation spécifique à réserver
             $representation = Representation::findOrFail($id);
-    
+
             return view('shows.reserve', compact('representation'));
         } catch (ModelNotFoundException $e) {
             return redirect()->back()->with('error', 'La représentation spécifiée n\'existe pas.');
         }
     }
 
-
     public function storeReservation(Request $request, $id)
-{
-    // Valider les données de la requête
-    $request->validate([
-        'places' => 'required|integer|min:1', // Modifier 'place_number' en 'places'
-    ]);
+    {
+        // Valider les données de la requête
+        $request->validate([
+            'places' => 'required|integer|min:1', // Modifier 'place_number' en 'places'
+        ]);
 
-    // Vérifier si le numéro de place spécifié est disponible pour la représentation
-    $representation = Representation::findOrFail($id);
+        // Vérifier si le numéro de place spécifié est disponible pour la représentation
+        $representation = Representation::findOrFail($id);
 
-    // Vérifier si la place spécifiée est déjà réservée pour cette représentation
-    $reservedPlaceExists = Representation_user::where('representation_id', $id)
-        ->where('places', $request->places)
-        ->exists();
+        // Vérifier si la place spécifiée est déjà réservée pour cette représentation
+        $reservedPlaceExists = Representation_user::where('representation_id', $id)
+            ->where('places', $request->places)
+            ->exists();
 
-    if ($reservedPlaceExists) {
-        return redirect()->back()->with('error', 'La place spécifiée est déjà réservée pour cette représentation.');
+        if ($reservedPlaceExists) {
+            return redirect()->back()->with('error', 'La place spécifiée est déjà réservée pour cette représentation.');
+        }
+
+        // Créer une nouvelle réservation
+        $reservation = new Representation_user();
+        $reservation->representation_id = $id;
+        $reservation->user_id = Auth::id();
+        $reservation->places = $request->places;
+        $reservation->save();
+
+        return redirect()->route('shows.index')->with('success', 'Réservation effectuée avec succès.');
     }
 
-    // Créer une nouvelle réservation
-    $reservation = new Representation_user();
-    $reservation->representation_id = $id;
-    $reservation->user_id = Auth::id();
-    $reservation->places = $request->places;
-    $reservation->save();
+    public function userReservations()
+    {
+        // Récupérer les réservations de l'utilisateur connecté
+        $userId = auth()->id();
+        $reservations = Representation_user::where('user_id', $userId)->with('representation')->get();
 
-    return redirect()->route('shows.index')->with('success', 'Réservation effectuée avec succès.');
-}
+        return view('shows.user_reservations', compact('reservations'));
+    }
 
-public function userReservations()
-{
-    // Récupérer les réservations de l'utilisateur connecté
-    $userId = auth()->id();
-    $reservations = Representation_user::where('user_id', $userId)->with('representation')->get();
-
-    return view('shows.user_reservations', compact('reservations'));
-}
-
-    
     public function search(Request $request)
     {
         $query = $request->input('query');
-        
+
         // Recherche dans les champs 'title' et 'description'
         $shows = Show::where('title', 'like', "%$query%")
                      ->orWhere('description', 'like', "%$query%")
+                     ->with('location') // Charger la relation location
                      ->get();
 
         // Récupérer toutes les localisations pour les filtres
@@ -120,7 +120,7 @@ public function userReservations()
     {
         try {
             $validatedData = $request->validate([
-                'slug' => 'required',            
+                'slug' => 'required',
                 'title' => 'required',
                 'description' => 'required',
                 'poster_url' => 'required',
@@ -140,7 +140,7 @@ public function userReservations()
     {
         $show = Show::findOrFail($id);
         $locations = Location::all();
-        return view('shows.edit', compact('show','locations'));
+        return view('shows.edit', compact('show', 'locations'));
     }
 
     public function update(Request $request, $id)
@@ -156,7 +156,6 @@ public function userReservations()
 
         $show = Show::findOrFail($id);
         $show->update($validatedData);
-
 
         return redirect()->route('shows.index')->with('success', 'Spectacle mis à jour avec succès.');
     }

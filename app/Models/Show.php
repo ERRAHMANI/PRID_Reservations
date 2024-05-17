@@ -13,9 +13,9 @@ class show extends Model
     {
         return $this->belongsTo(Representation::class);
     }
-    public function localition()
+    public function location()
     {
-        return $this->hasOne(Location::class);
+        return $this->belongsTo(Location::class);
     }
 
     public function artist_types()

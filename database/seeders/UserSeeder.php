@@ -18,118 +18,114 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        //Empty the table first
+        // Empty the table first
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
 
         // Tronquer la table
         DB::table('users')->truncate();
 
-        // Insérer des données dans la table artists
-        // Vos instructions d'insertion de données ici
-
         // Réactiver les contraintes de clé étrangère
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
-        
 
-        //Define data
+        // Define data
         $users = [
             [
-                'login'=>'bobejkj',
-                'firstname'=>'Bob',
-                'lastname'=>'Sull',
-                'email'=>'bobejjkj@sull.com',
-                'password'=>'12345678',
-                'langue'=>'fr',
-                'role'=>'admin',
+                'login' => 'johnsmith',
+                'firstname' => 'John',
+                'lastname' => 'Smith',
+                'email' => 'john.smith@example.com',
+                'password' => 'password123',
+                'langue' => 'en',
+                'role' => 'admin',
             ],
             [
-                'login'=>'annae',
-                'firstname'=>'Anna',
-                'lastname'=>'Lyse',
-                'email'=>'annae.lyse@sull.com',
-                'password'=>'12345678',
-                'langue'=>'en',
-                'role'=>'member',
+                'login' => 'janedoe',
+                'firstname' => 'Jane',
+                'lastname' => 'Doe',
+                'email' => 'jane.doe@example.com',
+                'password' => 'password123',
+                'langue' => 'en',
+                'role' => 'member',
             ],
             [
-                'login'=>'bobi',
-                'firstname'=>'Bobi',
-                'lastname'=>'Sulli',
-                'email'=>'bobi@sull.com',
-                'password'=>'123456789',
-                'langue'=>'fr',
-                'role'=>'admin',
+                'login' => 'peterparker',
+                'firstname' => 'Peter',
+                'lastname' => 'Parker',
+                'email' => 'peter.parker@example.com',
+                'password' => 'spiderman123',
+                'langue' => 'en',
+                'role' => 'admin',
             ],
             [
-                'login'=>'annais',
-                'firstname'=>'Annais',
-                'lastname'=>'Lyses',
-                'email'=>'annais.lyses@sull.com',
-                'password'=>'12345678',
-                'langue'=>'en',
-                'role'=>'member',
+                'login' => 'maryjane',
+                'firstname' => 'Mary',
+                'lastname' => 'Jane',
+                'email' => 'mary.jane@example.com',
+                'password' => 'password123',
+                'langue' => 'en',
+                'role' => 'member',
             ],
             [
-                'login'=>'bobou',
-                'firstname'=>'Bobou',
-                'lastname'=>'Sullou',
-                'email'=>'bob@sull.com',
-                'password'=>'12345678',
-                'langue'=>'fr',
-                'role'=>'admin',
+                'login' => 'brucewayne',
+                'firstname' => 'Bruce',
+                'lastname' => 'Wayne',
+                'email' => 'bruce.wayne@example.com',
+                'password' => 'batman123',
+                'langue' => 'en',
+                'role' => 'admin',
             ],
             [
-                'login'=>'anne',
-                'firstname'=>'Anne',
-                'lastname'=>'Lysa',
-                'email'=>'anne.lyse@sull.com',
-                'password'=>'12345678',
-                'langue'=>'en',
-                'role'=>'member',
+                'login' => 'clarkkent',
+                'firstname' => 'Clark',
+                'lastname' => 'Kent',
+                'email' => 'clark.kent@example.com',
+                'password' => 'superman123',
+                'langue' => 'en',
+                'role' => 'member',
             ],
             [
-                'login'=>'boba',
-                'firstname'=>'Boba',
-                'lastname'=>'Sulla',
-                'email'=>'boba@sull.com',
-                'password'=>'12345678',
-                'langue'=>'fr',
-                'role'=>'admin',
+                'login' => 'dianaprince',
+                'firstname' => 'Diana',
+                'lastname' => 'Prince',
+                'email' => 'diana.prince@example.com',
+                'password' => 'wonderwoman123',
+                'langue' => 'en',
+                'role' => 'admin',
             ],
             [
-                'login'=>'ann',
-                'firstname'=>'Ann',
-                'lastname'=>'Lyse',
-                'email'=>'ann.lyse@sull.com',
-                'password'=>'12345678',
-                'langue'=>'en',
-                'role'=>'member',
+                'login' => 'steverogers',
+                'firstname' => 'Steve',
+                'lastname' => 'Rogers',
+                'email' => 'steve.rogers@example.com',
+                'password' => 'captain123',
+                'langue' => 'en',
+                'role' => 'member',
             ],
             [
-                'login'=>'bo',
-                'firstname'=>'Bo',
-                'lastname'=>'Sul',
-                'email'=>'bo@sull.com',
-                'password'=>'12345678',
-                'langue'=>'fr',
-                'role'=>'admin',
+                'login' => 'tonystark',
+                'firstname' => 'Tony',
+                'lastname' => 'Stark',
+                'email' => 'tony.stark@example.com',
+                'password' => 'ironman123',
+                'langue' => 'en',
+                'role' => 'admin',
             ],
             [
-                'login'=>'an',
-                'firstname'=>'An',
-                'lastname'=>'Ly',
-                'email'=>'an.lyse@sull.com',
-                'password'=>'12345678',
-                'langue'=>'en',
-                'role'=>'member',
+                'login' => 'natasharomanoff',
+                'firstname' => 'Natasha',
+                'lastname' => 'Romanoff',
+                'email' => 'natasha.romanoff@example.com',
+                'password' => 'blackwidow123',
+                'langue' => 'en',
+                'role' => 'member',
             ],
         ];
-        
-        foreach($users as &$user) {
+
+        foreach ($users as &$user) {
             $user['password'] = Hash::make($user['password']);
         }
 
-        //Insert data in the table
-        DB::table('users')->insert($users);        
+        // Insert data into the table
+        DB::table('users')->insert($users);
     }
 }

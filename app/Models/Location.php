@@ -31,9 +31,9 @@ class Location extends Model
     {
         return $this->belongsTo(Representation::class);
     }
-    public function show()
+    public function shows()
     {
-        return $this->belongsTo(Show::class);
+        return $this->hasMany(Show::class);
     }
     protected $table = 'locations';
 

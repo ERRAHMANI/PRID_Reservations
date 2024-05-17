@@ -46,6 +46,8 @@
                 <img src="{{ $show->poster_url }}" alt="{{ $show->title }}">
                 <p>Prix : {{ $show->price }}</p>
                 <p>Réservable : {{ $show->bookable == 1 ? 'oui' : 'non' }}</p>
+                <!-- Affichage de la localisation -->
+                <p>Localisation : {{ $show->location->designation }} ({{ $show->location->address }})</p>
                 <!-- Ajouter un lien de réservation -->
                 <a href="{{ route('shows.reservations.reserve', $show->id) }}">Réserver une place</a>
                 <!-- Ajoutez ces liens uniquement si l'utilisateur est un admin -->

@@ -7,7 +7,6 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use App\Models\Location;
 
-
 class LocationSeeder extends Seeder
 {
     /**
@@ -20,96 +19,93 @@ class LocationSeeder extends Seeder
         // Tronquer la table
         DB::table('locations')->truncate();
 
-        // Insérer des données dans la table artists
-        // Vos instructions d'insertion de données ici
-
         // Réactiver les contraintes de clé étrangère
         DB::statement('SET FOREIGN_KEY_CHECKS=1');
                 
-         //Define data
-         $locations = [
-             [
-                 'slug' => 'location-1',
-                 'designation' => 'Location 1',
-                 'address' => '123 Main Street',
-                 'locality_id' => 1,
-                 'website' => 'http://www.example.com/location1',
-                 'phone' => '123-456-7890',
-             ],
-             [
-                 'slug' => 'location-2',
-                 'designation' => 'Location 2',
-                 'address' => '456 Elm Street',
-                 'locality_id' => 2,
-                 'website' => 'http://www.example.com/location2',
-                 'phone' => '456-789-0123',
-             ],
-             [
-                'slug' => 'location-3',
-                'designation' => 'Location 3',
-                'address' => '456 Elm Street',
-                'locality_id' => 2,
-                'website' => 'http://www.example.com/location2',
-                'phone' => '456-789-0123',
+        // Define data
+        $locations = [
+            [
+                'slug' => 'paris-center',
+                'designation' => 'Paris Center',
+                'address' => '10 Rue de Rivoli',
+                'locality_id' => 1,
+                'website' => 'http://www.pariscenter.com',
+                'phone' => '01-23-45-67-89',
             ],
             [
-                'slug' => 'location-4',
-                'designation' => 'Location 4',
-                'address' => '456 Elm Street',
+                'slug' => 'london-downtown',
+                'designation' => 'London Downtown',
+                'address' => '20 Oxford Street',
                 'locality_id' => 2,
-                'website' => 'http://www.example.com/location2',
-                'phone' => '456-789-0123',
+                'website' => 'http://www.londondowntown.co.uk',
+                'phone' => '+44-20-7946-0958',
             ],
             [
-                'slug' => 'location-5',
-                'designation' => 'Location 5',
-                'address' => '456 Elm Street',
-                'locality_id' => 2,
-                'website' => 'http://www.example.com/location2',
-                'phone' => '456-789-0123',
+                'slug' => 'berlin-mitte',
+                'designation' => 'Berlin Mitte',
+                'address' => '15 Unter den Linden',
+                'locality_id' => 3,
+                'website' => 'http://www.berlinmitte.de',
+                'phone' => '+49-30-123456',
             ],
             [
-                'slug' => 'location-26',
-                'designation' => 'Location 6',
-                'address' => '456 Elm Street',
-                'locality_id' => 2,
-                'website' => 'http://www.example.com/location2',
-                'phone' => '456-789-0123',
+                'slug' => 'new-york-central',
+                'designation' => 'New York Central',
+                'address' => '500 5th Avenue',
+                'locality_id' => 4,
+                'website' => 'http://www.newyorkcentral.com',
+                'phone' => '+1-212-555-7890',
             ],
             [
-                'slug' => 'location-7',
-                'designation' => 'Location 7',
-                'address' => '456 Elm Street',
-                'locality_id' => 2,
-                'website' => 'http://www.example.com/location2',
-                'phone' => '456-789-0123',
+                'slug' => 'tokyo-shibuya',
+                'designation' => 'Tokyo Shibuya',
+                'address' => '1-2-3 Shibuya',
+                'locality_id' => 5,
+                'website' => 'http://www.tokyoshibuya.jp',
+                'phone' => '+81-3-1234-5678',
             ],
             [
-                'slug' => 'location-8',
-                'designation' => 'Location 8',
-                'address' => '456 Elm Street',
-                'locality_id' => 2,
-                'website' => 'http://www.example.com/location2',
-                'phone' => '456-789-0123',
+                'slug' => 'sydney-harbour',
+                'designation' => 'Sydney Harbour',
+                'address' => '7 Circular Quay',
+                'locality_id' => 6,
+                'website' => 'http://www.sydneyharbour.com.au',
+                'phone' => '+61-2-1234-5678',
             ],
             [
-                'slug' => 'location-9',
-                'designation' => 'Location 9',
-                'address' => '456 Elm Street',
-                'locality_id' => 2,
-                'website' => 'http://www.example.com/location2',
-                'phone' => '456-789-0123',
+                'slug' => 'toronto-downtown',
+                'designation' => 'Toronto Downtown',
+                'address' => '100 Queen Street',
+                'locality_id' => 7,
+                'website' => 'http://www.torontodowntown.ca',
+                'phone' => '+1-416-555-1234',
             ],
             [
-                'slug' => 'location-10',
-                'designation' => 'Location 10',
-                'address' => '456 Elm Street',
-                'locality_id' => 2,
-                'website' => 'http://www.example.com/location2',
-                'phone' => '456-789-0123',
+                'slug' => 'dubai-marina',
+                'designation' => 'Dubai Marina',
+                'address' => '200 Marina Walk',
+                'locality_id' => 8,
+                'website' => 'http://www.dubaimarina.ae',
+                'phone' => '+971-4-567-1234',
             ],
-         ];
-         
-         DB::table('locations')->insert($locations);
+            [
+                'slug' => 'singapore-central',
+                'designation' => 'Singapore Central',
+                'address' => '30 Orchard Road',
+                'locality_id' => 9,
+                'website' => 'http://www.singaporecentral.sg',
+                'phone' => '+65-1234-5678',
+            ],
+            [
+                'slug' => 'moscow-red-square',
+                'designation' => 'Moscow Red Square',
+                'address' => '5 Red Square',
+                'locality_id' => 10,
+                'website' => 'http://www.moscowredsquare.ru',
+                'phone' => '+7-495-123-4567',
+            ],
+        ];
+
+        DB::table('locations')->insert($locations);
     }
 }
