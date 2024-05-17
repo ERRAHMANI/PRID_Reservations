@@ -26,10 +26,13 @@
         </div>
 
         <div>
-            <label for="location_id">ID de la localisation</label>
-            <input type="number" id="location_id" name="location_id" required>
+        <select name="location_id">
+            <option value="">Choisir une localisation</option>
+            @foreach($locations as $location)
+                <option value="{{ $location->id }}">{{ $location->designation }}</option>
+            @endforeach
+        </select>
         </div>
-
 
         <div>
             <label for="price">Prix</label>

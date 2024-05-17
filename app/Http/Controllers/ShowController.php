@@ -112,34 +112,35 @@ public function userReservations()
 
     public function create()
     {
-        return view('shows.create');
+        $locations = Location::all();
+        return view('shows.create', compact('locations'));
     }
 
     public function store(Request $request)
-{
-    try {
-        $validatedData = $request->validate([
-            'slug' => 'required',            
-            'title' => 'required',
-            'description' => 'required',
-            'poster_url' => 'required',
-            'location_id' => 'required',
-            'price' => 'required|numeric',
-        ]);
+    {
+        try {
+            $validatedData = $request->validate([
+                'slug' => 'required',            
+                'title' => 'required',
+                'description' => 'required',
+                'poster_url' => 'required',
+                'location_id' => 'required',
+                'price' => 'required|numeric',
+            ]);
 
-        Show::create($validatedData);
+            Show::create($validatedData);
 
-        return redirect()->route('shows.index')->with('success', 'Spectacle ajouté avec succès.');
-    } catch (\Exception $e) {
-        dd($e->getMessage());
+            return redirect()->route('shows.index')->with('success', 'Spectacle ajouté avec succès.');
+        } catch (\Exception $e) {
+            dd($e->getMessage());
+        }
     }
-}
-
 
     public function edit($id)
     {
         $show = Show::findOrFail($id);
-        return view('shows.edit', compact('show'));
+        $locations = Location::all();
+        return view('shows.edit', compact('show','locations'));
     }
 
     public function update(Request $request, $id)
@@ -155,6 +156,7 @@ public function userReservations()
 
         $show = Show::findOrFail($id);
         $show->update($validatedData);
+
 
         return redirect()->route('shows.index')->with('success', 'Spectacle mis à jour avec succès.');
     }
