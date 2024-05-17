@@ -119,6 +119,7 @@ public function userReservations()
 {
     try {
         $validatedData = $request->validate([
+            'slug' => 'required',            
             'title' => 'required',
             'description' => 'required',
             'poster_url' => 'required',

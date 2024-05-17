@@ -7,6 +7,10 @@
         @csrf
 
         <div>
+            <label for="slug">Slug</label>
+            <input type="text" id="slug" name="slug" required>
+        </div>
+        <div>
             <label for="title">Titre</label>
             <input type="text" id="title" name="title" required>
         </div>
