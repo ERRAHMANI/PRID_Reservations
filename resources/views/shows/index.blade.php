@@ -8,6 +8,10 @@
         <input type="text" name="query" placeholder="Rechercher...">
         <button type="submit">Rechercher</button>
     </form>
+    <!-- Ajoutez ce lien uniquement si l'utilisateur est un admin -->
+    @can('admin')
+        <a href="{{ route('shows.create') }}">Ajouter un spectacle</a>
+    @endcan
 
     <!-- Formulaire de tri -->
     <form action="{{ route('shows.index') }}" method="GET">
@@ -63,8 +67,5 @@
         @endforeach
     </ul>
 
-    <!-- Ajoutez ce lien uniquement si l'utilisateur est un admin -->
-    @can('admin')
-        <a href="{{ route('shows.create') }}">Ajouter un spectacle</a>
-    @endcan
+    
 @endsection
